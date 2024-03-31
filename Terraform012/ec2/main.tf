@@ -8,12 +8,21 @@ resource "aws_vpc" "my_vpc" {
 
 resource "aws_security_group" "launch-wizard" {
     # Going to import from AWS
+    
     ingress {
         cidr_blocks = ["0.0.0.0/0"]
         from_port = 22
         protocol = "tcp"
         to_port = 22
     }
+
+    egress {
+        cidr_blocks = ["0.0.0.0/0"]
+        from_port = 22
+        protocol = "tcp"
+        to_port = 22
+    }
+
 }
 
 resource "aws_instance" "jenkins" {
