@@ -1,0 +1,9 @@
+[tools]
+jenkins ansible_host=<>
+
+[webservers]
+
+[dbs]
+
+[load_balancers]
+
