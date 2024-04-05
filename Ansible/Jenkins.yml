@@ -1,0 +1,31 @@
+---
+- name: Install Jenkins
+  hosts: all
+  become: true
+  vars_files:
+    - host_vars/jenkins_vars.yml
+
+  tasks:
+    - name: Update apt cache
+      apt:
+        update_cache: yes
+
+    - name: Add Jenkins APT key
+      apt_key:
+        url: "{{ jenkins_apt_key_url }}"
+        state: present
+
+    - name: Add Jenkins APT repository
+      apt_repository:
+        repo: "{{ jenkins_apt_repo }}"
+        state: present
+
+    - name: Update apt cache
+      apt:
+        update_cache: yes
+
+    - name: Install Jenkins
+      apt:
+        name: "{{ jenkins_package_name }}"
+        state: latest
+

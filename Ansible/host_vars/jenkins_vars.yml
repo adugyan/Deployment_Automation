@@ -1,0 +1,6 @@
+# Jenkins Variables
+
+#Installation
+jenkins_apt_key_url: "https://pkg.jenkins.io/debian-stable/jenkins.io.key"
+jenkins_apt_repo: "deb https://pkg.jenkins.io/debian-stable binary/"
+jenkins_package_name: "jenkins"

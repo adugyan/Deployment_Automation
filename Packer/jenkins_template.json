@@ -1,20 +1,18 @@
 {
     "variables" : {
-        "region" : "AWS REGION",
-        "aws_profile": "AWS PROFILE",
-        "source_ami" : "AMAZON LINUX AMI 2 ID",
-        "instance_type": "INSTANCE TYPE"
+        "region" : "us-east-1",
+        "source_ami" : "ami-0cd59ecaf368e5ccf",
+        "instance_type": "t2.micro"
     },
     "builders" : [
         {
             "type" : "amazon-ebs",
-            "profile" : "{{user `aws_profile`}}",
             "region" : "{{user `region`}}",
             "instance_type" : "{{user `instance_type`}}",
             "source_ami" : "{{user `source_ami`}}",
-            "ssh_username" : "ec2-user",
+            "ssh_username" : "ubuntu",
             "ami_name" : "jenkins-master-2.204.1",
-            "ami_description" : "Amazon Linux Image with Jenkins Server",
+            "ami_description" : "Ubuntu Image with Jenkins Server",
             "run_tags" : {
                 "Name" : "packer-builder"
             }
@@ -22,8 +20,9 @@
     ],
     "provisioners" : [
         {
-            "type" : "ansible",
-            "playbook_file" : "/path/to/file"
+            "type" : "shell",
+            "script" : "./setup.sh",
+	    "execute_command" : "sudo -E -S sh '{{ .Path }}'"
         }
     ]
 }
